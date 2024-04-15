@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div>
+    <h2>Let's see how you performed!</h2>
+    <h3>Chosen username: {{ username }}</h3>
+    <ul>Boundaries report:
+        {% if report %}
+        <h5>Username meets all the requirements, thank you!</h5>
+        {% else %}
+            {% if lower %}
+
+            {% else %}
+            <li>Lowercase condition not met</li>
+            {% endif %}
+
+            {% if upper %}
+
+            {% else %}
+            <li>Uppercase condition not met</li>
+            {% endif %}
+
+            {% if end_num %}
+
+            {% else %}
+            <li>Last character being a number condition is not met</li>
+            {% endif %}
+        {% endif %}
+    </ul>
+</div>
+
+{% endblock %}

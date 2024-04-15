@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3>Please fill out the username below to be checked.</h3>
+<p>Mandatory requirements:
+<ul>
+    <li>upper case</li>
+    <li>lower case</li>
+    <li>number at the end</li>
+</ul>
+</p>
+
+<form action="{{ url_for('report') }}">
+    <label for="username">Username: </label>
+    <input type="text" name="username">
+    <input type="submit" name="username_form">
+</form>
+
+
+{% endblock %}
