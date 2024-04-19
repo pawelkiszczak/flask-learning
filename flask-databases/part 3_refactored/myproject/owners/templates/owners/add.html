@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Add an owner!</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">Add a new owner with the form below</h6>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.name.label }} {{ form.name() }}
+            {{ form.puppy_id.label }} {{ form.puppy_id() }}
+            {{ form.submit() }}
+        </form>
+        <p>{{ form }}</p>
+    </div>
+</div>
+    
+{% endblock %}
