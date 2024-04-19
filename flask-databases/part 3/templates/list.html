@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Here is a list of all available puppies!</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">Have a peek, maybe you'll find some interesting pups!</h6>
+        <ul>
+            {% for pup in puppies %}
+            <li>{{ pup }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% endblock %}
