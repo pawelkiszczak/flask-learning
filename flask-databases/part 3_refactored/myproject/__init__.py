@@ -2,13 +2,17 @@
 import os
 
 from flask import Flask
+from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
+
 # Application config
-app = Flask(__name__)
+app = Flask(__name__,
+            static_folder='/static')
 
 basedir = os.path.abspath(os.path.dirname(__file__))
+app.config.from_object(Config)
 app.config['SECRET_KEY'] = 'mykey'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
