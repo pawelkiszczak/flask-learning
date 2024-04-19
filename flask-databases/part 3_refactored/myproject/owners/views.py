@@ -22,4 +22,4 @@ def add():
 
         return redirect(url_for('puppies.list'))
 
-    return render_template('add.html', form=form)
+    return render_template('add_owner.html', form=form)
