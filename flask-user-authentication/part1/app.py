@@ -64,6 +64,16 @@ def register():
     
     return render_template('register.html', form=form)
 
+@app.route('/test', methods=["GET", "POST"])
+def test():
+    if request.method == "POST":
+        pass
+
+    with app.app_context():
+        user_data = User.query.all()
+
+    return render_template('test.html', user_data=user_data)    
+
 if __name__ == "__main__":
     app.run(debug=True)
 
