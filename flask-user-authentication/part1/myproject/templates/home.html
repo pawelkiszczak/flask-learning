@@ -1,6 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
 
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for message in messages %}
+            <div id="flash_message" class="alert alert-{{ message[0] }} d-flex align-items-center mt-3" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                <div class="d-flex justify-content-center">
+                  {{message[1]}}
+                </div>
+                <button type="button" id="flash_close_button" class="btn-close justify-content-right" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
 <div class="card">
     <div class="card-body">
         {% if current_user.is_authenticated %}

@@ -69,6 +69,7 @@ def register():
                     return redirect(url_for('login'))
                 
             except ValidationError:
+                flash('User already exsists')
                 return redirect(url_for('home'))
     
     return render_template('register.html', form=form)
