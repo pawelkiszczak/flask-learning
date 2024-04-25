@@ -1,9 +1,11 @@
 # app.py
 from myproject import app, db
 from flask import render_template, redirect, request, url_for, flash, abort
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 from myproject.models import User
 from myproject.forms import LoginForm, RegistrationForm
+from wtforms import ValidationError
+import logging
 
 @app.route('/')
 def home():
@@ -51,26 +53,37 @@ def login():
 def register():
     form = RegistrationForm()
 
-    if form.validate_on_submit():
-        user = User(email=form.email.data,
-                    username=form.username.data,
-                    password=form.password.data)
-        
-        print(user.email, user.username, user.password_hash)
-        db.session.add(user)
-        db.session.commit()
-        flash('Thanks for the registration')
-        return(redirect(url_for('login')))
+    if request.method == "POST":
+        if form.validate_on_submit():
+            user = User(email=form.email.data,
+                        username=form.username.data,
+                        password=form.password.data)
+            
+            print(user.email, user.username, user.password_hash)
+
+            try:
+                if form.check_email(form.email) and form.check_username(form.username):
+                    db.session.add(user)
+                    db.session.commit()
+                    flash('Thanks for the registration', "success")
+                    return redirect(url_for('login'))
+                
+            except ValidationError:
+                return redirect(url_for('home'))
     
     return render_template('register.html', form=form)
 
 @app.route('/test', methods=["GET", "POST"])
 def test():
+    
+    ### POST
     if request.method == "POST":
-        pass
+        pass    
 
-    with app.app_context():
-        user_data = User.query.all()
+    ### GET
+    # get current user's username
+    username = current_user.username
+    user_data = User.query.filter_by(username=username)
 
     return render_template('test.html', user_data=user_data)    
 

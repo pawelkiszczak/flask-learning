@@ -2,6 +2,8 @@
 
 {% block content %}
     {% for user in user_data %}
-    <p>Username: {{ user.username }} <br> 10 chars of hash: {{ user.password_hash[:10] }} <br> Email: {{ user.email }}</p>
+    <p>Username: {{ user.username }} <br> 
+        10 chars of hash: {{ user.password_hash.split(':')[1] }} <br> 
+        Email: {{ user.email }}</p>
     {% endfor %}
 {% endblock %}

@@ -4,7 +4,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo
 from wtforms import ValidationError
-#from .models import User
+from .models import User
 
 
 class LoginForm(FlaskForm):
@@ -24,8 +24,15 @@ class RegistrationForm(FlaskForm):
 
     def check_email(self, field):
         if User.query.filter_by(email=field.data).first():
-            raise ValidationError('Your email has already been registered!')
+            print(f"\n\n{User.query.filter_by(email=field.data).first()}\n\n")
+            return False
+        else:
+            return True
+            #raise ValidationError('Your email has already been registered!')
         
     def check_username(self, field):
         if User.query.filter_by(username=field.data).first():
-            raise ValidationError('Username already taken!')
+            return False
+        else: 
+            return True
+            #raise ValidationError('Username already taken!')
