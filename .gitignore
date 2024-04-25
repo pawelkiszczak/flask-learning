@@ -162,3 +162,6 @@ cython_debug/
 # local
 .DS_Store
 .DS_Store/*
+flask-user-authentication/oauth-google.json
+flask-user-authentication/part2 - OAuth/cert.pem
+flask-user-authentication/part2 - OAuth/key.pem

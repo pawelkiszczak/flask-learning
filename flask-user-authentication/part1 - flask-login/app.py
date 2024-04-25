@@ -5,7 +5,6 @@ from flask_login import login_user, login_required, logout_user, current_user
 from myproject.models import User
 from myproject.forms import LoginForm, RegistrationForm
 from wtforms import ValidationError
-import logging
 
 @app.route('/')
 def home():
@@ -75,6 +74,7 @@ def register():
     return render_template('register.html', form=form)
 
 @app.route('/test', methods=["GET", "POST"])
+@login_required
 def test():
     
     ### POST
