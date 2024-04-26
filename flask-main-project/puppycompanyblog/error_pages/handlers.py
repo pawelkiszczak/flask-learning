@@ -10,4 +10,4 @@ def error_404(error):
 
 @error_pages.app_errorhandler(403)
 def error_403(error):
-    return render_template('error_pages/403.html')
+    return render_template('error_pages/403.html'), 403
