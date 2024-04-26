@@ -24,7 +24,7 @@ class User(db.Model, UserMixin):
                          index=True)
     password_hash = db.Column(db.String(128))
     post = db.relationship('BlogPost', 
-                           backreference='author',
+                           backref='author',
                            lazy=True)
     
     def __init__(self, email, username, password):
@@ -43,7 +43,7 @@ class BlogPost(db.Model):
     __tablename_ = 'blogpost'
 
     # Relationship to the 'User' Model
-    users = db.relationship(User)
+    #users = db.relationship(User)
     
     id = db.Column(db.Integer, 
                    primary_key=True)
@@ -52,7 +52,7 @@ class BlogPost(db.Model):
                         nullable=False)
     date = db.Column(db.DateTime,
                      nullable=False,
-                     default=datetime.now(datetime.UTC))
+                     default=datetime.now())
     title = db.Column(db.String(128), 
                       nullable=False)
     text = db.Column(db.Text, 
