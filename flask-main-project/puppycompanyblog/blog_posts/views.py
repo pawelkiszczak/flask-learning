@@ -35,7 +35,7 @@ def blog_post(blog_post_id):
                            post=blog_post)
 
 # UPDATE A POST
-@blog_post.route('/<int:blog_post_id>/update', methods=['GET', 'POST'])
+@blog_posts.route('/<int:blog_post_id>/update', methods=['GET', 'POST'])
 @login_required
 def update(blog_post_id):
     # Grab a blog post related to given id
@@ -67,7 +67,7 @@ def update(blog_post_id):
     return render_template('create_post.html', title='Updating', form=form)
 
 # DELETE A POST
-@blog_post.route('/<int:blog_post_id/delete', methods=['GET', 'POST'])
+@blog_posts.route('/<int:blog_post_id>/delete', methods=['GET', 'POST'])
 @login_required
 def delete_post(blog_post_id):
 
@@ -77,6 +77,6 @@ def delete_post(blog_post_id):
         abort(403)
 
     db.session.delete(blog_post)
-    db.session.delete()
+    db.session.commit()
     flash('Blog Post deleted')
     return redirect(url_for('core.index'))

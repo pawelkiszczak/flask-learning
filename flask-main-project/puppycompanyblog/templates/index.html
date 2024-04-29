@@ -3,14 +3,50 @@
 {% block content %}
 
 <div class="card text-center">
-    <div class="card-header">
-      Puppy Company Blog
-    </div>
+  <div class="card-header">
+    Puppy Company Blog
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Landing page here!</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="{{ url_for('core.info') }}" class="btn btn-primary">Know something about us</a>
+  </div>
+</div>
+
+<div class="container">
+  {% for post in blog_posts.items %}
+  <div class="card">
     <div class="card-body">
-      <h5 class="card-title">Landing page here!</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      <a href="{{ url_for('core.info') }}" class="btn btn-primary">Know something about us</a>
+      <h2><a class="card-title" href="{{ url_for('blog_posts.blog_post', blog_post_id=post.id) }}">{{ post.title }}</a>
+      </h2>
+      <a href="{{ url_for('users.user_posts', username=post.author.username) }}">Written by: {{ post.author.username
+        }}</a>
+      <p>Published on: {{ post.date.strftime('%Y-%m-%d') }}</p>
+      <p>{{ post.text[:10] }}...</p>
+      <a class="btn btn-primary" href="{{ url_for('blog_posts.blog_post', blog_post_id=post.id) }}">Read Blog Post</a>
     </div>
   </div>
-    
+  {% endfor %}
+</div>
+
+<nav aria-label="Page Navigation Example">
+  <ul class="pagination justify-content-center">
+    {% for page_num in blog_posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+
+    {% if blog_posts.page == page_num %}
+    <li class="page-item disabled">
+      <a class="page-link" href=" {{ url_for('core.index', page=page_num) }}">
+        {{ page_num }}</a>
+    </li>
+    {% else %}
+    <li class="page-item">
+      <a class="page-link" href=" {{ url_for('core.index', page=page_num) }}">
+        {{ page_num }}</a>
+    </li>
+    {% endif %}
+
+    {% endfor %}
+  </ul>
+</nav>
+
 {% endblock %}

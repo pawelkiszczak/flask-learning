@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container">
-    <div class="card">
+<div class="container bg-light">
+    <div class="card bg-light mb-3 border-dark">
         <br>
         <img src="{{ url_for('static', filename='profile_pics/' + current_user.profile_image) }}" class="card-img-top"
         style="max-width: 200px; max-height: 200px; width: auto; height: auto; display: block; margin: 0 auto;">
         <div class="card-body">
-            <h5 class="card-title">Welcome to the page for {{ current_user.username }}</h5>
+            <h5 class="card-header">Welcome to the page for {{ current_user.username }}</h5>
             <div class="container">
                 <form method="POST" action="" enctype="multipart/form-data">
 
