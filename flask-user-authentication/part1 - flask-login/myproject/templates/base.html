@@ -26,7 +26,8 @@
         as it does all of the heavy lifting regarding the user authentication-->
         {% if current_user.is_authenticated %}
         <li class="nav-link"><a href="{{ url_for('logout') }}">Logout</a></li>
-        <li class="nav-link"><a href="{{ url_for('test') }}">Test</a></li>
+        <li class="nav-link"><a href="{{ url_for('get_motto') }}">Generate motto</a></li>
+        <li class="nav-link"><a href="{{ url_for('motto_list') }}">Motto list</a></li>
         {% else %}
         <li class="nav-link"><a href="{{ url_for('login') }}">Login</a></li>
         <li class="nav-link"><a href="{{ url_for('register') }}">Register</a></li>

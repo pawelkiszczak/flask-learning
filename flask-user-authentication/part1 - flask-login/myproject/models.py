@@ -23,6 +23,9 @@ class User(db.Model, UserMixin):
                          nullable=False)
     password_hash = db.Column(db.String(128),
                               nullable=False)
+    mottos = db.relationship('Motto',
+                            backref='user',
+                            lazy=True)
 
     # Init
     def __init__(self, email, username, password):
@@ -32,3 +35,24 @@ class User(db.Model, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+    
+
+class Motto(db.Model):
+    __tablename__ = 'mottos'
+
+    # Fields
+    motto_id = db.Column(db.Integer,
+                         primary_key=True)
+    user_id = db.Column(db.Integer,
+                      db.ForeignKey('users.id'),
+                      nullable=False)
+    motto_text = db.Column(db.Text, 
+                      nullable=False)
+    
+    def __init__(self, motto_text, user_id):
+        self.motto_text = motto_text
+        self.user_id = user_id
+
+    def __repr__(self):
+        return f"Motto ID: {self.motto_id} | Motto: {self.motto_text}"
+    

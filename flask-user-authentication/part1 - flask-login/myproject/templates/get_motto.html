@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="POST">
+    <button class="btn btn-secondary" type="submit">Generate and store motto</button>
+</form>
+<div class="card">
+    <div class="card-header">Motto na dziś: <strong>{{ generated_motto }}</strong></p>
+        <p>{{ user_data }}</p>
+</div>
+
+{% endblock %}

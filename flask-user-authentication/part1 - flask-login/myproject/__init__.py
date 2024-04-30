@@ -14,6 +14,7 @@ app.config['SECRET_KEY'] = 'mykey'
 basedir = os.path.abspath(os.path.dirname(__name__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, "data.sqlite")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['OPENAI_API_KEY'] = os.environ.get("OPENAI_API_KEY")
 
 # Link the app with database
 db = SQLAlchemy(app)
